@@ -7,15 +7,6 @@ class Ship {
     private $speed_kmh;
     private $capacity;
 
-
-    public function __construct($id, $name, $camp, $speed_kmh, $capacity) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->camp = $camp;
-        $this->speed_kmh = $speed_kmh;
-        $this->capacity = $capacity;
-    }
-
     /**
      * @return mixed
      */
@@ -93,29 +84,28 @@ class Ship {
      */
 
     public function add_ships($json) {
-        include("./include/connexion.php");
+    include("../include/connexion.php");
+        $vaisseauxData = json_decode($json, true);
+        $stmt = $cnx->prepare("INSERT INTO Ship (id, name, camp, speed_kmh, capacity) 
+    VALUES (:id, :name, :camp, :speed_kmh, :capacity)
+    ON DUPLICATE KEY UPDATE 
+        name = VALUES(name), 
+        camp = VALUES(camp), 
+        speed_kmh = VALUES(speed_kmh), 
+        capacity = VALUES(capacity)");
 
-        try {
-            $vaisseauxData = json_decode($json, true);
-            $stmt = $cnx->prepare("INSERT INTO Ship (id, name, camp, speed_kmh, capacity) VALUES (:id, :name, :camp, :speed_kmh, :capacity)");
 
-            foreach ($vaisseauxData as $vaisseau) {
-                // Lier chaque paramètre à sa valeur avec un type explicite
-                $stmt->bindParam(':id', $vaisseau['id'], PDO::PARAM_INT);
-                $stmt->bindParam(':name', $vaisseau['name'], PDO::PARAM_STR);
-                $stmt->bindParam(':camp', $vaisseau['camp'], PDO::PARAM_STR);
-                $stmt->bindParam(':speed_kmh', $vaisseau['speed_kmh'], PDO::PARAM_STR);
-                $stmt->bindParam(':capacity', $vaisseau['capacity'], PDO::PARAM_INT);
+        foreach ($vaisseauxData as $vaisseau) {
+            $stmt->bindParam(':id', $vaisseau['id'], PDO::PARAM_INT);
+            $stmt->bindParam(':name', $vaisseau['name'], PDO::PARAM_STR);
+            $stmt->bindParam(':camp', $vaisseau['camp'], PDO::PARAM_STR);
+            $stmt->bindParam(':speed_kmh', $vaisseau['speed_kmh'], PDO::PARAM_STR);
+            $stmt->bindParam(':capacity', $vaisseau['capacity'], PDO::PARAM_INT);
 
-                // Exécuter la requête d'insertion
-                $stmt->execute();
-            }
-
-            echo "Données insérées avec succès !";
-
-        } catch (PDOException $e) {
-            echo "Erreur de connexion : " . $e->getMessage();
+            $stmt->execute();
         }
+
+        echo "Toutes les données ont été insérées avec succés !";
     }
 
 
