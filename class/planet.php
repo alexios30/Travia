@@ -342,9 +342,8 @@ class Planet {
     private $diameter;
     private $gravity;
 
-    public function add_planets($json) {
+    public function add_planet($planet) {
         include("../include/connexion.php");
-        $planetsData = json_decode($json, true);
 
         // Préparation de la requête d'insertion ou de mise à jour
           $stmt = $cnx->prepare("INSERT INTO Planet (
@@ -376,32 +375,27 @@ class Planet {
             Gravity = VALUES(Gravity)");
 
         // Boucle d'insertion des données JSON
-        foreach ($planetsData as $planet) {
-                $stmt->execute([
-                    ':name' => $planet['Name'],
-                    ':image' => $planet['Image'] ?? null,
-                    ':coord' => $planet['Coord'] ?? null,
-                    ':x' => $planet['X'],
-                    ':y' => $planet['Y'],
-                    ':subGridCoord' => $planet['SubGridCoord'] ?? null,
-                    ':subGridX' => $planet['SubGridX'],
-                    ':subGridY' => $planet['SubGridY'],
-                    ':sunName' => $planet['SunName'] ?? null,
-                    ':region' => $planet['Region'],
-                    ':sector' => $planet['Sector'],
-                    ':suns' => $planet['Suns'] ,
-                    ':moons' => $planet['Moons'],
-                    ':position' => $planet['Position'],
-                    ':distance' => $planet['Distance'],
-                    ':lengthDay' => $planet['LengthDay'],
-                    ':lengthYear' => $planet['LengthYear'],
-                    ':diameter' => $planet['Diameter'],
-                    ':gravity' => $planet['Gravity']
-                ]);
-        }
-
-        echo "Données de planètes insérées ou mises à jour avec succès !";
+            $stmt->execute([
+                ':name' => $planet['Name'],
+                ':image' => $planet['Image'] ?? null,
+                ':coord' => $planet['Coord'] ?? null,
+                ':x' => $planet['X'],
+                ':y' => $planet['Y'],
+                ':subGridCoord' => $planet['SubGridCoord'] ?? null,
+                ':subGridX' => $planet['SubGridX'],
+                ':subGridY' => $planet['SubGridY'],
+                ':sunName' => $planet['SunName'] ?? null,
+                ':region' => $planet['Region'],
+                ':sector' => $planet['Sector'],
+                ':suns' => $planet['Suns'] ,
+                ':moons' => $planet['Moons'],
+                ':position' => $planet['Position'],
+                ':distance' => $planet['Distance'],
+                ':lengthDay' => $planet['LengthDay'],
+                ':lengthYear' => $planet['LengthYear'],
+                ':diameter' => $planet['Diameter'],
+                ':gravity' => $planet['Gravity']
+            ]);
     }
-
 }
 ?>
