@@ -1,8 +1,8 @@
 <?php
 
 class Planet {
-    private $id;
-    private $name;
+    private int $id;
+    private string $name;
     private $image;
     private $coord;
 
@@ -398,4 +398,4 @@ class Planet {
             ]);
     }
 }
-?>
+
