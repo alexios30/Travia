@@ -346,7 +346,7 @@ class Planet {
         include("../include/connexion.php");
 
         // Préparation de la requête d'insertion ou de mise à jour
-          $stmt = $cnx->prepare("INSERT INTO Planet (
+          $stmt = $cnx->prepare("INSERT INTO planet (
             Name, Image, Coord, X, Y, SubGridCoord, SubGridX, SubGridY, 
             SunName, Region, Sector, Suns, Moons, Position, Distance, 
             LengthDay, LengthYear, Diameter, Gravity) 
