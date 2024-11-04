@@ -84,15 +84,15 @@ class Ship {
      */
 
     public function add_ships($json) {
-    include("../include/connexion.php");
+        include("../include/connexion.php");
         $vaisseauxData = json_decode($json, true);
         $stmt = $cnx->prepare("INSERT INTO Ship (id, name, camp, speed_kmh, capacity) 
-    VALUES (:id, :name, :camp, :speed_kmh, :capacity)
-    ON DUPLICATE KEY UPDATE 
-        name = VALUES(name), 
-        camp = VALUES(camp), 
-        speed_kmh = VALUES(speed_kmh), 
-        capacity = VALUES(capacity)");
+            VALUES (:id, :name, :camp, :speed_kmh, :capacity)
+            ON DUPLICATE KEY UPDATE 
+                name = VALUES(name), 
+                camp = VALUES(camp), 
+                speed_kmh = VALUES(speed_kmh), 
+                capacity = VALUES(capacity)");
 
 
         foreach ($vaisseauxData as $vaisseau) {
