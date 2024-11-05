@@ -1,10 +1,14 @@
 <?php
 
 class Planet {
-    private int $id;
+    private $id;
     private string $name;
     private $image;
     private $coord;
+
+    /**
+     * @param $id
+     */
 
     /**
      * @return mixed
@@ -342,19 +346,23 @@ class Planet {
     private $diameter;
     private $gravity;
 
+    public function __construct($id = null) {
+        $this->id = $id;
+    }
     public function add_planet($planet) {
         include("../include/connexion.php");
 
         // Préparation de la requête d'insertion ou de mise à jour
           $stmt = $cnx->prepare("INSERT INTO planet (
-            Name, Image, Coord, X, Y, SubGridCoord, SubGridX, SubGridY, 
+            Id,Name, Image, Coord, X, Y, SubGridCoord, SubGridX, SubGridY, 
             SunName, Region, Sector, Suns, Moons, Position, Distance, 
             LengthDay, LengthYear, Diameter, Gravity) 
         VALUES (
-            :name, :image, :coord, :x, :y, :subGridCoord, :subGridX, 
+            :Id,:name, :image, :coord, :x, :y, :subGridCoord, :subGridX, 
             :subGridY, :sunName, :region, :sector, :suns, :moons, 
             :position, :distance, :lengthDay, :lengthYear, :diameter, :gravity)
         ON DUPLICATE KEY UPDATE 
+            Id = VALUES(Id),
             Image = VALUES(Image),
             Coord = VALUES(Coord),
             X = VALUES(X),
@@ -376,6 +384,7 @@ class Planet {
 
         // Boucle d'insertion des données JSON
             $stmt->execute([
+                ':Id' => $planet['Id'],
                 ':name' => $planet['Name'],
                 ':image' => $planet['Image'] ?? null,
                 ':coord' => $planet['Coord'] ?? null,
@@ -396,6 +405,31 @@ class Planet {
                 ':diameter' => $planet['Diameter'],
                 ':gravity' => $planet['Gravity']
             ]);
+    }
+    public function add_trip($planet) {
+        include("../include/connexion.php");
+        if (isset($planet['trips'])) {
+            foreach ($planet['trips'] as $day => $trips) {
+                foreach ($trips as $trip){
+                    // Préparation de la requête d'insertion ou de mise à jour
+                    $stmt = $cnx->prepare("INSERT INTO trip (depart_planet_id, destination_planet_id, ship_id, day_id, departure_time) VALUES( :depart_planet_id, :destination_planet_id, :ship_id, :day_id, :departure_time)
+                    ON DUPLICATE KEY UPDATE 
+                        depart_planet_id = VALUES(depart_planet_id),
+                        destination_planet_id = VALUES(destination_planet_id),
+                        ship_id = VALUES(ship_id);
+                        day_id = VALUES(day_id),
+                        departure_time = VALUES(departure_time);");
+
+                    $stmt->execute([
+                        ':depart_planet_id' => $planet['Id'],
+                        ':destination_planet_id' => $trip['destination_planet_id'][0],
+                        ':departure_time' => $trip['departure_time'][0],
+                        ':ship_id' => $trip['ship_id'][0],
+                        ':day_id' => $day
+                    ]);
+                }
+            }
+        }
     }
 }
 

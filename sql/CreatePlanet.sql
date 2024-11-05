@@ -1,0 +1,22 @@
+CREATE TABLE planet (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        name VARCHAR(255) NOT NULL UNIQUE,
+                        image VARCHAR(255) DEFAULT NULL,
+                        coord VARCHAR(50) DEFAULT NULL,
+                        x FLOAT NOT NULL,
+                        y FLOAT NOT NULL,
+                        sub_grid_coord VARCHAR(50) DEFAULT NULL,
+                        sub_grid_x FLOAT DEFAULT NULL,
+                        sub_grid_y FLOAT DEFAULT NULL,
+                        sun_name VARCHAR(255) DEFAULT NULL,
+                        region VARCHAR(255) NOT NULL,
+                        sector VARCHAR(255) NOT NULL,
+                        suns INT NOT NULL DEFAULT 1,
+                        moons INT NOT NULL DEFAULT 0,
+                        position INT NOT NULL DEFAULT 0,
+                        distance FLOAT NOT NULL DEFAULT 0,
+                        length_day FLOAT NOT NULL DEFAULT 24,
+                        length_year FLOAT NOT NULL DEFAULT 365,
+                        diameter FLOAT NOT NULL DEFAULT 0,
+                        gravity FLOAT NOT NULL DEFAULT 1
+);
