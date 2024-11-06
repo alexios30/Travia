@@ -10,28 +10,29 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="row">
-        <h1>Accueil</h1>
-        <form method="post" action="travel.php" id="planet-form">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="departure">Planète de Départ</label>
-                    <input type="text" class="form-control" id="departure" placeholder="Sélectionnez la planète de départ">
-                </div>
+    <div class="container">
+        <div class="row">
+            <h1>Accueil</h1>
+            <form method="post" action="travel.php" id="planet-form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="departure">Planète de Départ</label>
+                        <input type="text" class="form-control" id="departure" placeholder="Sélectionnez la planète de départ">
+                    </div>
 
-                <div class="col-md-6">
-                    <label for="arrival">Planète d'Arrivée</label>
-                    <input type="text" class="form-control" id="arrival" placeholder="Sélectionnez la planète d'arrivée">
-                </div>
-                <div class="col-12 mt-5 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary">Rechercher</button>
-                </div>
+                    <div class="col-md-6">
+                        <label for="arrival">Planète d'Arrivée</label>
+                        <input type="text" class="form-control" id="arrival" placeholder="Sélectionnez la planète d'arrivée">
+                    </div>
+                    <div class="col-12 mt-5 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Rechercher</button>
+                    </div>
 
-            </div>
-        </form>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+</body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
