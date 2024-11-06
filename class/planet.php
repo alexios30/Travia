@@ -431,5 +431,40 @@ class Planet {
             }
         }
     }
+    public function create_url_planet($nom_fichier_image) {
+        // Remplace les espaces
+        $nom_fichier_image = str_replace(' ', '_', $nom_fichier_image);
+
+        // Calcul du hash MD5 sur le nom de fichier modifié
+        $md5_hash = md5($nom_fichier_image);
+
+        //Creation de l'url
+        $url = "https://static.wikia.nocookie.net/starwars/images/"
+            . $md5_hash[0] . "/"
+            . $md5_hash[0] . $md5_hash[1] . "/"
+            . $nom_fichier_image;
+
+        return $url;
+    }
+
+
+    public function print_planet(){
+        $id = 1;
+        include("../include/connexion.php");
+        $stmt = $cnx->prepare("SELECT * FROM planet WHERE id = :id");
+        $stmt->execute([":id" => $id]);
+        $planet = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($planet) {
+            echo "<h2>" . htmlspecialchars($planet['name']) . "</h2>";
+            $image_url = $this->create_url_planet($planet['image']);
+            echo "<img src='" . htmlspecialchars($image_url) . "' alt='Image de " . htmlspecialchars($planet['name']) . "'>";
+            echo "<p><strong>Région:</strong> " . htmlspecialchars($planet['region']) . "</p>";
+            echo "<p><strong>Secteur:</strong> " . htmlspecialchars($planet['sector']) . "</p>";
+        } else {
+            echo "<p>Aucune planète trouvée avec cet ID.</p>";
+        }
+    }
+
 }
 
