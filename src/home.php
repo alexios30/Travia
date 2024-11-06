@@ -17,16 +17,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="departure">Planète de Départ</label>
-                    <input type="text" id="departure" placeholder="Sélectionnez la planète de départ">
+                    <input type="text" class="form-control" id="departure" placeholder="Sélectionnez la planète de départ">
                 </div>
 
                 <div class="col-md-6">
                     <label for="arrival">Planète d'Arrivée</label>
-                    <input type="text" id="arrival" placeholder="Sélectionnez la planète d'arrivée">
+                    <input type="text" class="form-control" id="arrival" placeholder="Sélectionnez la planète d'arrivée">
                 </div>
-
-                <div class="col-12">
-                    <button type="submit">Rechercher</button>
+                <div class="col-12 mt-5 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
                 </div>
 
             </div>
