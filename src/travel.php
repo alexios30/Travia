@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travek</title>
-    <link rel="stylesheet" href="../css/home.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $departure = $_POST['departure_id'] ?? '';
+    $arrival = $_POST['arrival_id'] ?? '';
 
-<body>
-<div class="container">
-    <div class="row">
-        <h1>Travel</h1>
+    // Vérifier si les champs sont remplis
+    if (empty($departure) || empty($arrival)) {
+        die("Les champs départ et arrivée ne peuvent pas être vides.");
+    }
+    include("../class/planet.php");
+    $planet_departure = new Planet();
+    $planet_departure->print_planet($departure);
 
-    </div>
-</div>
+    $planet_arrival = new Planet();
+    $planet_arrival->print_planet($arrival);
+}
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
