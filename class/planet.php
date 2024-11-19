@@ -448,8 +448,7 @@ class Planet {
     }
 
 
-    public function print_planet(){
-        $id = 1;
+    public function print_planet($id){
         include("../include/connexion.php");
         $stmt = $cnx->prepare("SELECT * FROM planet WHERE id = :id");
         $stmt->execute([":id" => $id]);
