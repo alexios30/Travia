@@ -450,8 +450,21 @@ class Planet {
 
     public function print_planet($id){
         include("../include/connexion.php");
-        $stmt = $cnx->prepare("SELECT * FROM planet WHERE id = :id");
+
+        // Requête préparée
+        $query = "SELECT * FROM planet WHERE id = :id";
+
+        // Créez une version de la requête avec la valeur de :id
+        $query_with_value = str_replace(":id", $id, $query); // Remplace :id par la valeur réelle
+
+        // Préparer et exécuter la requête
+        $stmt = $cnx->prepare($query);
         $stmt->execute([":id" => $id]);
+
+        // Ajouter la requête au log
+        $this->add_log($query_with_value);
+
+        // Récupérer les résultats
         $planet = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($planet) {
@@ -463,6 +476,19 @@ class Planet {
         } else {
             echo "<p>Aucune planète trouvée avec cet ID.</p>";
         }
+    }
+
+    public function add_log($query){
+        include("../include/connexion.php");
+
+        // Récupérer la date actuelle
+        $date = date('Y-m-d H:i:s');
+
+        // Correction de la requête SQL en enlevant la parenthèse en trop
+        $stmt = $cnx->prepare("INSERT INTO log (description, date) VALUES(:description, :date)");
+
+        // Exécution de la requête avec les paramètres
+        $stmt->execute(['description' => $query, 'date' => $date]);
     }
 
 }

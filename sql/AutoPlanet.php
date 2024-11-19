@@ -16,7 +16,6 @@ try {
             "name" => $row['name']
         ];
     }
-
     // Retourner les données au format JSON
     echo json_encode($planets);
 
