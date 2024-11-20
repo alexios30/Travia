@@ -1,0 +1,12 @@
+body {
+    background-image: url('../img/galaxy.jpg');
+    background-size: cover;
+}
+.container {
+    h1 {
+        color: white;
+    }
+    label{
+        color: white;
+    }
+}
