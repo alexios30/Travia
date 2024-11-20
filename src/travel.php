@@ -2,6 +2,11 @@
 <html lang="fr">
 
 <?php
+if(!(isset($_POST['departure_id']) || isset($_POST['arrival_id']))){
+    header('Location: home.php');
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $departure = $_POST['departure_id'] ?? '';
     $arrival = $_POST['arrival_id'] ?? '';
@@ -13,13 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include("../class/planet.php");
     $planet_departure = new Planet();
     $planet_arrival = new Planet();
+
+    include("../sql/distance.php");
 }
 ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel</title>
+    <title>Travia</title>
     <link rel="stylesheet" href="../css/home.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -40,6 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php
             $planet_arrival->print_planet($arrival);
             ?>
+        </div>
+        <div class="col-12">
+            <h2>L distance entre les planètes est de :
+                <?php
+                echo $distance_departure;
+                ?>
+            </h2>
+
         </div>
     </div>
 </div>
