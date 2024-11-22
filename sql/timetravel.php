@@ -16,6 +16,7 @@
             header('Location: ../src/home.php');
             exit();
         }
+
         // Récupérer les informations des vaisseaux
         $stmt = $cnx->prepare("SELECT id, name, speed_kmh FROM ship");
         $stmt->execute();
@@ -29,13 +30,17 @@
             // Calculer le temps de voyage en heures
             $travel_time_hours = $distance_km / $speed_kmh;
 
-            // Arrondir le temps de voyage au centième près
-            $travel_time_hours_rounded = round($travel_time_hours, 2);
+            // Séparer les heures et les minutes
+            $hours = floor($travel_time_hours);
+            $minutes = ($travel_time_hours - $hours) * 60;
+
+            // Arrondir les minutes au centième près
+            $minutes_rounded = round($minutes, 0);
             ?>
             <div class="card mb-3">
                 <div class="card-body">
                     <h3 class="card-title"><?php echo htmlspecialchars($name); ?></h3>
-                    <p class="card-text">Time travel : <?php echo htmlspecialchars($travel_time_hours_rounded); ?> heures</p>
+                    <p class="card-text">Time travel : <?php echo htmlspecialchars($hours); ?> heures et <?php echo htmlspecialchars($minutes_rounded); ?> minutes</p>
                 </div>
             </div>
             <?php
