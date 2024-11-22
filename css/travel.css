@@ -1,0 +1,23 @@
+body {
+    background-image: url('../img/galaxy.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.planet {
+    h1{
+        color: white;
+    }
+    h2{
+        color: white;
+    }
+    p{
+        color: white;
+    }
+}
+.distance{
+    h2{
+        color: white;
+        font-size: 20px;
+    }
+}

@@ -2,11 +2,36 @@ body {
     background-image: url('../img/galaxy.jpg');
     background-size: cover;
 }
-.container {
+
+.form {
+    background-color: #343a40; /* Couleur de fond */
+    padding: 20px; /* Espacement interne */
+    border-radius: 10px; /* Coins arrondis */
+
     h1 {
         color: white;
     }
-    label{
+    .planet {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        label{
+            font-size: 25px;
+            color: white;
+        }
+    }
+    .button {
         color: white;
+        background: linear-gradient(to right, red, darkred); /* Dégradé linéaire de rouge à rouge foncé */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    .button:hover {
+        background: linear-gradient(to right, darkred, red); /* Inverser le dégradé au survol */
     }
 }

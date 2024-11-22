@@ -13,24 +13,24 @@
 
 <body>
 <div class="container">
-    <div class="row">
+    <div class="row form mt-5">
         <h1>Home</h1>
         <form method="post" action="travel.php" id="planet-form">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 planet">
                     <label for="departure">Starting planet</label>
                     <input type="hidden" name="departure_id" id="departure_id">
                     <input type="text" class="form-control" name="departure" id="departure"
                            placeholder="Select the starting planet" required>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 planet">
                     <label for="arrival">Arrival planet</label>
                     <input type="hidden" name="arrival_id" id="arrival_id">
                     <input type="text" class="form-control" name="arrival" id="arrival"
                            placeholder="Select the arrival planet" required>
                 </div>
                 <div class="col-12 mt-5 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary">Research</button>
+                    <button type="submit" class="btn button">Research</button>
                 </div>
             </div>
         </form>
