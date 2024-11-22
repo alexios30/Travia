@@ -18,16 +18,16 @@
         <form method="post" action="travel.php" id="planet-form">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="departure">Starting planett</label>
+                    <label for="departure">Starting planet</label>
                     <input type="hidden" name="departure_id" id="departure_id">
                     <input type="text" class="form-control" name="departure" id="departure"
-                           placeholder="Sélectionnez la planète de départ" required>
+                           placeholder="Select the starting planet" required>
                 </div>
                 <div class="col-md-6">
                     <label for="arrival">Arrival planet</label>
                     <input type="hidden" name="arrival_id" id="arrival_id">
                     <input type="text" class="form-control" name="arrival" id="arrival"
-                           placeholder="Sélectionnez la planète d'arrivée" required>
+                           placeholder="Select the arrival planet" required>
                 </div>
                 <div class="col-12 mt-5 d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary">Research</button>
