@@ -3,23 +3,44 @@
 include("../include/connexion.php");
 
 try {
-    if (!isset($departure) && isset($arrival)) {
-        throw new Exception("La variable \$departure n'est pas définie.");
+    if (!isset($departure) || !isset($arrival)) {
+        header('Location: ../src/home.php');
     }
-    $stmt = $cnx->prepare("SELECT distance FROM planet WHERE id = :id");
+
+    // Récupérer les coordonnées du point de départ
+    $stmt = $cnx->prepare("SELECT X, Y, SubGridX, SubGridY FROM planet WHERE id = :id");
     $stmt->execute(['id' => $departure]);
-    $result_distance_departure = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result_departure = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $stmt2 = $cnx->prepare("SELECT distance FROM planet WHERE id = :id");
+    $X_departure = $result_departure['X'];
+    $Y_departure = $result_departure['Y'];
+    $SubGridX_departure = $result_departure['SubGridX'];
+    $SubGridY_departure = $result_departure['SubGridY'];
+
+    // Récupérer les coordonnées du point d'arrivée
+    $stmt2 = $cnx->prepare("SELECT X, Y, SubGridX, SubGridY FROM planet WHERE id = :id");
     $stmt2->execute(['id' => $arrival]);
-    $result_distance_arrival = $stmt2->fetch(PDO::FETCH_ASSOC);
+    $result_arrival = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-    if ($result_distance_departure && isset($result_distance_departure['distance'])&&$result_distance_arrival && isset($result_distance_arrival['distance'])) {
-        $distance_departure = (int) $result_distance_departure['distance'];
-        $distance_arrival = (int) $result_distance_arrival['distance'];
-        $difference = abs($distance_departure - $distance_arrival);
+    $X_arrival = $result_arrival['X'];
+    $Y_arrival = $result_arrival['Y'];
+    $SubGridX_arrival = $result_arrival['SubGridX'];
+    $SubGridY_arrival = $result_arrival['SubGridY'];
+
+    // Calculer les positions en milliards de kilomètres
+    $position_x_departure = ($X_departure + $SubGridX_departure) * 6;
+    $position_y_departure = ($Y_departure + $SubGridY_departure) * 6;
+    $position_x_arrival = ($X_arrival + $SubGridX_arrival) * 6;
+    $position_y_arrival = ($Y_arrival + $SubGridY_arrival) * 6;
+
+    // Calculer la distance si les positions sont disponibles
+    if ($position_x_departure !== null && $position_y_departure !== null && $position_x_arrival !== null && $position_y_arrival !== null) {
+        $distance_norounded = sqrt(
+            pow($position_x_arrival - $position_x_departure, 2) +
+            pow($position_y_arrival - $position_y_departure, 2)
+        );
+        $distance = round($distance_norounded, 2);
     }
 } catch (PDOException $e) {
-    // Gérer les erreurs PDO
     echo json_encode(["error" => "Erreur de connexion ou de requête : " . $e->getMessage()]);
 }

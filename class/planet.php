@@ -472,7 +472,7 @@ class Planet {
             $image_url = $this->create_url_planet($planet['image']);
             echo "<img src='" . htmlspecialchars($image_url) . "' alt='Image de " . htmlspecialchars($planet['name']) . "'>";
             echo "<p><strong>Région:</strong> " . htmlspecialchars($planet['region']) . "</p>";
-            echo "<p><strong>Secteur:</strong> " . htmlspecialchars($planet['sector']) . "</p>";
+            echo "<p><strong>Sector:</strong> " . htmlspecialchars($planet['sector']) . "</p>";
         } else {
             echo "<p>Aucune planète trouvée avec cet ID.</p>";
         }

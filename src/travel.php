@@ -37,25 +37,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="container">
     <div class="row">
         <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-            <h1>Planète de départ</h1>
+            <h1>Starting planet</h1>
             <?php
             $planet_departure->print_planet($departure);
             ?>
         </div>
         <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-            <h1>Planète d'arrivée</h1>
+            <h1>Arrival planet</h1>
             <?php
             $planet_arrival->print_planet($arrival);
             ?>
         </div>
         <div class="col-12">
-            <h2>La distance entre les planètes est de :
+            <h2>The distance between the planets is :
                 <?php
-                echo $difference;
-                ?> km.
+                echo $distance;
+                ?> billions of kilometers
             </h2>
-
         </div>
+        <?php
+        include("../sql/timetravel.php");
+        ?>
+
     </div>
 </div>
 
