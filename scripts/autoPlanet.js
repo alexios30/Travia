@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Charger les planètes depuis le back-end PHP
-    $.getJSON("../sql/AutoPlanet.php", function(data) {
+    $.getJSON("../sql/autoPlanet.php", function(data) {
         // Vérifier si les données sont valides
         if (data && Array.isArray(data)) {
             // Extraire les noms des planètes dans un tableau et créer un objet pour lier les noms aux IDs
