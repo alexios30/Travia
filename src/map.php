@@ -36,21 +36,21 @@ include('../sql/position.php');
     </div>
 </div>
 
-
 <script>
     const mapData = {
         departure: {
             name: <?= json_encode($result_departure['name']); ?>,
             coordinates: [<?= $position_y_departure_result; ?>, <?= $position_x_departure_result; ?>],
-            region: <?= json_encode($result_departure['region']); ?>
+            region: <?= json_encode($result_departure['region']); ?>,
+            diameter: <?= json_encode($result_departure['diameter']); ?>
         },
         arrival: {
             name: <?= json_encode($result_arrival['name']); ?>,
             coordinates: [<?= $position_y_arrival_result; ?>, <?= $position_x_arrival_result; ?>],
-            region: <?= json_encode($result_arrival['region']); ?>
+            region: <?= json_encode($result_arrival['region']); ?>,
+            diameter: <?= json_encode($result_arrival['diameter']); ?>
         }
     };
-
 </script>
 
 <script src="../scripts/map.js"></script>

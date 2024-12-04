@@ -9,7 +9,7 @@ try {
     }
 
     // Récupérer les coordonnées du point de départ
-    $stmt = $cnx->prepare("SELECT name, region, X, Y, SubGridX, SubGridY FROM planet WHERE id = :id");
+    $stmt = $cnx->prepare("SELECT name, region, X, Y, SubGridX, SubGridY, diameter FROM planet WHERE id = :id");
     $stmt->execute(['id' => $departure]);
     $result_departure = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -17,10 +17,9 @@ try {
     $Y_departure = $result_departure['Y'];
     $SubGridX_departure = $result_departure['SubGridX'];
     $SubGridY_departure = $result_departure['SubGridY'];
-    $region_departure = $result_departure['region'];
 
     // Récupérer les coordonnées du point d'arrivée
-    $stmt2 = $cnx->prepare("SELECT name, region, X, Y, SubGridX, SubGridY FROM planet WHERE id = :id");
+    $stmt2 = $cnx->prepare("SELECT name, region, X, Y, SubGridX, SubGridY, diameter FROM planet WHERE id = :id");
     $stmt2->execute(['id' => $arrival]);
     $result_arrival = $stmt2->fetch(PDO::FETCH_ASSOC);
 
