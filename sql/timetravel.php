@@ -40,7 +40,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h3 class="card-title"><?php echo htmlspecialchars($name); ?></h3>
-                    <p class="card-text">Time travel : <?php echo htmlspecialchars($hours); ?> heures et <?php echo htmlspecialchars($minutes_rounded); ?> minutes</p>
+                    <p class="card-text">Time travel : <?php echo htmlspecialchars($hours); ?> hours and <?php echo htmlspecialchars($minutes_rounded); ?> minutes</p>
                 </div>
             </div>
             <?php

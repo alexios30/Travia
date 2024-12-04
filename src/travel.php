@@ -55,6 +55,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ?> billions of kilometers
             </h2>
         </div>
+        <div class="">
+            <form method="post" action="map.php">
+                <input type="hidden" name="departure" value="<?php echo htmlspecialchars($departure); ?>">
+                <input type="hidden" name="arrival" value="<?php echo htmlspecialchars($arrival); ?>">
+                <button type="submit" class="button">See map</button>
+            </form>
+        </div>
+
         <?php
         include("../sql/timetravel.php");
         ?>
