@@ -28,15 +28,23 @@
 
             $travel_time_hours = $distance_km / $speed_kmh;
 
-            $hours = floor($travel_time_hours);
-            $minutes = ($travel_time_hours - $hours) * 60;
+            $days = floor($travel_time_hours / 24);
+            $remaining_hours = $travel_time_hours - ($days * 24);
+            $hours = floor($remaining_hours); // Full hours
+            $minutes = ($remaining_hours - $hours) * 60;
+            $minutes_rounded = round($minutes);
 
-            $minutes_rounded = round($minutes, 0);
             ?>
             <div class="card mb-3">
                 <div class="card-body">
                     <h3 class="card-title"><?php echo htmlspecialchars($name); ?></h3>
-                    <p class="card-text">Time travel : <?php echo htmlspecialchars($hours); ?> hours and <?php echo htmlspecialchars($minutes_rounded); ?> minutes</p>
+                    <p class="card-text">
+                        Time travel:
+                        <?php
+                        echo htmlspecialchars($days); ?> days,
+                        <?php echo htmlspecialchars($hours); ?> hours, and
+                        <?php echo htmlspecialchars($minutes_rounded); ?> minutes
+                    </p>
                 </div>
             </div>
             <?php
@@ -46,6 +54,7 @@
         echo json_encode(["error" => "Erreur de connexion ou de requête : " . $e->getMessage()]);
     }
     ?>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
