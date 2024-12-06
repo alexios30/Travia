@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Les champs départ et arrivée ne peuvent pas être vides.");
     }
 }
-
+include("../include/navbar.php");
 include('../sql/position.php');
 
 try {

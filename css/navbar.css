@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Aurabesh';
+    src: url('../font/aurebesh.otf') format('truetype');
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.aurabesh {
+    font-family: 'Aurabesh', sans-serif;
+}

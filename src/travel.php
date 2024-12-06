@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $planet_departure = new Planet();
     $planet_arrival = new Planet();
 
+    include("../include/navbar.php");
     include("../sql/distance.php");
 }
 ?>
@@ -59,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="post" action="map.php">
                 <input type="hidden" name="departure" value="<?php echo htmlspecialchars($departure); ?>">
                 <input type="hidden" name="arrival" value="<?php echo htmlspecialchars($arrival); ?>">
-                <button type="submit" class="button">See map</button>
+                <button type="submit" class="btn btn-primary">See map</button>
             </form>
         </div>
 
