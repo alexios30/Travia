@@ -89,3 +89,24 @@ L.polyline([departureCoordinates, arrivalCoordinates], {
     color: 'white',
     weight: 4
 }).addTo(map);
+
+// Ajouter une légende
+const legend = L.control({ position: 'bottomright' });
+
+legend.onAdd = function (map) {
+    const div = L.DomUtil.create('div', 'info legend');
+    const regions = Object.keys(regionColors);
+
+    // Construire la légende avec les couleurs et les noms des régions
+    let legendContent = '<h4>Regions</h4>';
+    regions.forEach(region => {
+        legendContent += `
+            <i style="background:${regionColors[region]}"></i> ${region}<br>
+        `;
+    });
+
+    div.innerHTML = legendContent;
+    return div;
+};
+
+legend.addTo(map);

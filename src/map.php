@@ -51,6 +51,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travia - Map</title>
+    <link rel="stylesheet" href="../css/map.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
@@ -58,9 +59,9 @@ try {
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="content">
             <h1>Map</h1>
-            <div id="map" style="height: 600px; width: 100%;"></div>
+            <div class="map" id="map"></div>
         </div>
     </div>
 </div>

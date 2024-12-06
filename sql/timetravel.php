@@ -17,7 +17,6 @@
             exit();
         }
 
-        // Récupérer les informations des vaisseaux
         $stmt = $cnx->prepare("SELECT id, name, speed_kmh FROM ship");
         $stmt->execute();
         $results_ship = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -27,14 +26,11 @@
             $name = $result_ship["name"];
             $speed_kmh = $result_ship["speed_kmh"];
 
-            // Calculer le temps de voyage en heures
             $travel_time_hours = $distance_km / $speed_kmh;
 
-            // Séparer les heures et les minutes
             $hours = floor($travel_time_hours);
             $minutes = ($travel_time_hours - $hours) * 60;
 
-            // Arrondir les minutes au centième près
             $minutes_rounded = round($minutes, 0);
             ?>
             <div class="card mb-3">
