@@ -411,12 +411,22 @@ class Planet {
         if (isset($planet['trips'])) {
             foreach ($planet['trips'] as $day => $trips) {
                 foreach ($trips as $trip){
+                    $checkQuery = $cnx->prepare("SELECT COUNT(*) FROM planet WHERE id = :depart_planet_id");
+                    $checkQuery->execute([':depart_planet_id' => $planet['Id']]);
+                    if ($checkQuery->fetchColumn() == 0) {
+                       break;
+                    }
+                    $checkDestQuery = $cnx->prepare("SELECT COUNT(*) FROM planet WHERE id = :destination_planet_id");
+                    $checkDestQuery->execute([':destination_planet_id' => $trip['destination_planet_id'][0]]);
+                    if ($checkDestQuery->fetchColumn() == 0) {
+                        break;
+                    }
                     // Préparation de la requête d'insertion ou de mise à jour
                     $stmt = $cnx->prepare("INSERT INTO trip (depart_planet_id, destination_planet_id, ship_id, day_id, departure_time) VALUES( :depart_planet_id, :destination_planet_id, :ship_id, :day_id, :departure_time)
                     ON DUPLICATE KEY UPDATE 
                         depart_planet_id = VALUES(depart_planet_id),
                         destination_planet_id = VALUES(destination_planet_id),
-                        ship_id = VALUES(ship_id);
+                        ship_id = VALUES(ship_id),
                         day_id = VALUES(day_id),
                         departure_time = VALUES(departure_time);");
 

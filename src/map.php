@@ -15,8 +15,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Les champs départ et arrivée ne peuvent pas être vides.");
     }
 }
+
 include('../sql/position.php');
+
+try {
+    $stmt = $cnx->prepare("
+        SELECT name, region, X, Y, SubGridX, SubGridY, diameter 
+        FROM planet 
+        WHERE id NOT IN (:departure, :arrival)
+    ");
+    $stmt->execute([
+        ':departure' => $departure,
+        ':arrival' => $arrival
+    ]);
+
+    $planets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Calcul des coordonnées pour toutes les planètes
+    foreach ($planets as &$planet) {
+        $planet['X'] = ($planet['X'] + $planet['SubGridX']) * 6;
+        $planet['Y'] = ($planet['Y'] + $planet['SubGridY']) * 6;
+    }
+
+    $planetsJson = json_encode($planets);
+
+} catch (PDOException $e) {
+    // En cas d'erreur, envoyer un message JSON
+    echo json_encode(["error" => "Erreur de connexion ou de requête : " . $e->getMessage()]);
+    exit;
+}
 ?>
+
 
 <head>
     <meta charset="UTF-8">
@@ -49,7 +78,8 @@ include('../sql/position.php');
             coordinates: [<?= $position_y_arrival_result; ?>, <?= $position_x_arrival_result; ?>],
             region: <?= json_encode($result_arrival['region']); ?>,
             diameter: <?= json_encode($result_arrival['diameter']); ?>
-        }
+        },
+        allPlanets: <?= $planetsJson; ?>
     };
 </script>
 
