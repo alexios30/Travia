@@ -1,0 +1,41 @@
+body {
+    background-image: url('../img/galaxy.jpg');
+    background-size: cover;
+    h1 {
+        color: white;
+    }
+}
+.content{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+.map {
+    height: 600px;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+.legend {
+    background: rgba(0, 0, 0, 0.7); /* Fond semi-transparent noir */
+    color: white;                  /* Texte blanc */
+    padding: 10px;                 /* Marges internes */
+    font-size: 12px;               /* Taille du texte */
+    line-height: 18px;             /* Hauteur de ligne */
+    border-radius: 5px;            /* Coins arrondis */
+}
+.legend h4 {
+    margin: 0 0 5px;               /* Espacement en dessous */
+    padding: 0;                    /* Pas de marges internes */
+    font-size: 14px;               /* Texte un peu plus grand */
+    text-align: center;            /* Centré */
+}
+.legend i {
+    width: 18px;                   /* Largeur des couleurs */
+    height: 18px;                  /* Hauteur des couleurs */
+    float: left;                   /* Les carrés sont alignés à gauche */
+    margin-right: 8px;             /* Espacement à droite */
+    opacity: 0.8;                  /* Légèrement transparent */
+    border-radius: 50%;            /* Cercles pour chaque couleur */
+}
