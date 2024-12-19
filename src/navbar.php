@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../src/home.php">HomePage</a>
+                    <a class="nav-link active" aria-current="page" href="home.php">HomePage</a>
                 </li>
                 <li class="nav-item">
                     <button class="btn btn-secondary" onclick="toggleFont()">Switch to Galactic Font</button>
@@ -37,39 +37,37 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Vérifier l'état de la police dans le localStorage
     document.addEventListener("DOMContentLoaded", () => {
         const pageContent = document.getElementById('page-content');
         const buttonElement = document.querySelector('.btn-secondary');
 
-        // Vérifier la police actuelle stockée
+        // Récupérer l'état actuel de la police depuis localStorage
         const isAurabeshStored = localStorage.getItem("isAurabesh") === "true";
 
         if (isAurabeshStored) {
             pageContent.classList.add('aurabesh');
-            buttonElement.textContent = 'Switch to Standard Font';
+            if (buttonElement) buttonElement.textContent = 'Switch to Standard Font';
         } else {
-            buttonElement.textContent = 'Switch to Galactic Font';
+            if (buttonElement) buttonElement.textContent = 'Switch to Galactic Font';
         }
     });
 
-    let isAurabesh = localStorage.getItem("isAurabesh") === "true"; // Charger l'état initial
+    let isAurabesh = localStorage.getItem("isAurabesh") === "true"; // État initial
 
     function toggleFont() {
         const pageContent = document.getElementById('page-content');
         const buttonElement = document.querySelector('.btn-secondary');
 
-        // Basculer entre les polices et stocker dans localStorage
         if (!isAurabesh) {
             pageContent.classList.add('aurabesh');
-            buttonElement.textContent = 'Switch to Standard Font';
+            if (buttonElement) buttonElement.textContent = 'Switch to Standard Font';
         } else {
             pageContent.classList.remove('aurabesh');
-            buttonElement.textContent = 'Switch to Galactic Font';
+            if (buttonElement) buttonElement.textContent = 'Switch to Galactic Font';
         }
 
-        isAurabesh = !isAurabesh; // Inverser l'état
-        localStorage.setItem("isAurabesh", isAurabesh); // Sauvegarder l'état
+        isAurabesh = !isAurabesh; // Basculer l'état
+        localStorage.setItem("isAurabesh", isAurabesh); // Enregistrer dans localStorage
     }
 </script>
 

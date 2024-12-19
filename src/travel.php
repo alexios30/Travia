@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $planet_departure = new Planet();
     $planet_arrival = new Planet();
 
-    include("../include/navbar.php");
+    include("../src/navbar.php");
     include("../sql/distance.php");
 }
 ?>
